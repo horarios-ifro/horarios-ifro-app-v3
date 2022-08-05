@@ -1,0 +1,18 @@
+.courseContainer,
+.periodContainer,
+.labelContainer {
+  gap: 0.5rem;
+  display: grid;
+
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(var(--items), auto);
+}
+
+@media (min-width: 680px) {
+  .courseContainer,
+  .periodContainer,
+  .labelContainer {
+    grid-template-columns: repeat(var(--items), 1fr);
+    grid-template-rows: auto;
+  }
+}

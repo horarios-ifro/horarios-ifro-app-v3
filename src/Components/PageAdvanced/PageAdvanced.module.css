@@ -1,0 +1,14 @@
+.container {
+  height: 100%;
+  display: grid;
+
+  grid-template-columns: 1fr;
+  grid-template-rows: 220px 1fr;
+}
+
+@media (min-width: 700px) {
+  .container {
+    grid-template-columns: auto auto 1fr;
+    grid-template-rows: 1fr;
+  }
+}
