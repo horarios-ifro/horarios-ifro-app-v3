@@ -6,9 +6,9 @@ import { createElement, useCallback, useLayoutEffect, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import ReportTable from "../ReportTable/ReportTable";
 import PageAdvancedContentReportTable from "./PageAdvancedContentReportTable";
-import { getSVGDataForTable } from "./utils/getSVGDataForTable";
+import { getSVGDataForTable } from "../../Features/getSVGDataForTable";
 import { useSelectedItemsReportTableData } from "./utils/useSelectedItemsReportTableData";
-import { DEFAULT_TARGET_SCALE } from "./utils/DEFAULT_TARGET_SCALE";
+import { DEFAULT_TARGET_SCALE } from "../../Features/DEFAULT_TARGET_SCALE";
 
 const PageAdvancedContentPaneReport = () => {
   const { reportTableData } = useSelectedItemsReportTableData();

@@ -10,11 +10,9 @@ import * as api from "../../../Features/horarios-ifro-data-v2-client/api";
 import { IGetWeekTeacherResourceResponseDto } from "../../../Features/horarios-ifro-data-v2-client/api/resources/weeks/interfaces/IGetWeekTeacherResourceResponseDto";
 import { IGetWeekClassResourceResponseDto } from "../../../Features/horarios-ifro-data-v2-client/api/resources/weeks/interfaces/IGetWeekClassResourceResponseDto";
 import { IPageAdvancedElementsListItem } from "../interfaces/IPageAdvancedElementsListItem";
-import {
-  getReportTableDataColumnFromWeekClass,
-  getReportTableDataColumnFromWeekTeacher,
-} from "./getReportTableDataColumnFromWeekTeacher";
-import { getReportTableDataDaysFromWeek } from "./getReportTableDataDaysFromWeek";
+import { getReportTableDataColumnFromWeekTeacher } from "../../../Features/getReportTableData/getReportTableDataColumnFromWeekTeacher";
+import { getReportTableDataDaysFromWeek } from "../../../Features/getReportTableData/getReportTableDataDaysFromWeek";
+import { getReportTableDataColumnFromWeekClass } from "../../../Features/getReportTableData/getReportTableDataColumnFromWeekClass";
 
 export const useReportDataForItems = (
   selectedItems: IPageAdvancedElementsListItem[]

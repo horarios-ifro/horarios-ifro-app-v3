@@ -4,6 +4,8 @@ import { IListWeeksItem } from "./IListWeeksItem";
 
 export type IGetWeekClassResourceResponseDto = {
   week: IListWeeksItem;
+
   klass: IListWeekClassesItem;
+
   items: IGetWeekClassItemsItem[];
 };

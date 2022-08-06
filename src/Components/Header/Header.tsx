@@ -23,8 +23,6 @@ export const Header = () => {
                 Início
               </Typography>
             </Box>
-
-            <Typography sx={{ cursor: "default" }}>v0.3-unknown</Typography>
           </Container>
         </Toolbar>
       </AppBar>

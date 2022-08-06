@@ -4,6 +4,8 @@ import * as api from "../../Features/horarios-ifro-data-v2-client/api";
 import { IListWeeksResourceResponseDto } from "../../Features/horarios-ifro-data-v2-client/api/resources/weeks/interfaces/IListWeeksResourceResponseDto";
 import { useEffect, useMemo, useState } from "react";
 import { IListWeeksItem } from "../../Features/horarios-ifro-data-v2-client/api/resources/weeks/interfaces/IListWeeksItem";
+import { IListWeekTeachersResourceResponseDto } from "../../Features/horarios-ifro-data-v2-client/api/resources/weeks/interfaces/IListWeekTeachersResourceResponseDto";
+import { IListWeekClassesResourceResponseDto } from "../../Features/horarios-ifro-data-v2-client/api/resources/weeks/interfaces/IListWeekClassesResourceResponseDto";
 
 export type IWeeksContext = {
   weeksQuery: UseQueryResult<IListWeeksResourceResponseDto, unknown>;
@@ -15,6 +17,16 @@ export type IWeeksContext = {
   week: IListWeeksItem | undefined;
 
   weeks: IListWeeksItem[];
+
+  weekTeachersQuery: UseQueryResult<
+    IListWeekTeachersResourceResponseDto,
+    unknown
+  >;
+
+  weekClassesQuery: UseQueryResult<
+    IListWeekClassesResourceResponseDto,
+    unknown
+  >;
 };
 
 export const WeeksContext = createContext({} as IWeeksContext);
@@ -49,9 +61,46 @@ export const WeeksContextProvider = ({ children }: { children: any }) => {
     [allWeeks, selectedWeek]
   );
 
+  const weekTeachersQuery = useQuery(
+    ["week", selectedWeek, "teachers"],
+    async () => {
+      if (selectedWeek) {
+        return api.invokeResource(
+          api.resources.weeks.listWeekTeachersResource,
+          {
+            weekId: selectedWeek,
+          }
+        );
+      }
+
+      return [];
+    }
+  );
+
+  const weekClassesQuery = useQuery(
+    ["week", selectedWeek, "classes"],
+    async () => {
+      if (selectedWeek) {
+        return api.invokeResource(api.resources.weeks.listWeekClassesResource, {
+          weekId: selectedWeek,
+        });
+      }
+
+      return [];
+    }
+  );
+
   return (
     <WeeksContext.Provider
-      value={{ weeksQuery, selectedWeek, setSelectedWeek, weeks, week }}
+      value={{
+        weeksQuery,
+        selectedWeek,
+        setSelectedWeek,
+        weeks,
+        week,
+        weekTeachersQuery,
+        weekClassesQuery,
+      }}
     >
       {children}
     </WeeksContext.Provider>

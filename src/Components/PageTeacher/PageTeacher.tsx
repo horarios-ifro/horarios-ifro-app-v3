@@ -1,17 +1,15 @@
 import { AppContent } from "../AppContent/AppContent";
-import { Header } from "../Header/Header";
 import PageTeacherContent from "./PageTeacherContent";
+import PageTeacherHeader from "./PageTeacherHeader";
 
-const PageTeacher = () => {
-  return (
-    <>
-      <Header />
+const PageTeacher = () => (
+  <>
+    <PageTeacherHeader />
 
-      <AppContent>
-        <PageTeacherContent />
-      </AppContent>
-    </>
-  );
-};
+    <AppContent>
+      <PageTeacherContent />
+    </AppContent>
+  </>
+);
 
 export default PageTeacher;

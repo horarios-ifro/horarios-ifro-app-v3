@@ -1,14 +1,15 @@
-import AppContainer from "../AppContainer/AppContainer";
-import Box from "@mui/material/Box";
+import WeekItemView from "../WeekItemView/WeekItemView";
+import { WeekItemViewContextProvider } from "../WeekItemView/WeekItemViewContext";
+import { usePageTeacherWeekTeacherQuery } from "./utils/usePageTeacherWeekTeacherQuery";
 
 const PageTeacherContent = () => {
+  const dataQuery = usePageTeacherWeekTeacherQuery();
+
   return (
     <>
-      <AppContainer>
-        <Box sx={{ height: "100%", overflow: "auto" }}>
-          <h1>Trabalho Em Progresso.</h1>
-        </Box>
-      </AppContainer>
+      <WeekItemViewContextProvider mode={"teacher"} dataQuery={dataQuery}>
+        <WeekItemView />
+      </WeekItemViewContextProvider>
     </>
   );
 };

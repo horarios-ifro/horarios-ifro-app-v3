@@ -8,10 +8,9 @@ import {
   useMemo,
   useState,
 } from "react";
-import { createContext } from "use-context-selector";
-import { useWeekClassesQuery } from "../WeeksContext/useWeekClassesQuery";
-import { useWeekTeachersQuery } from "../WeeksContext/useWeekTeachersQuery";
+import { createContext, useContextSelector } from "use-context-selector";
 import { IPageAdvancedElementsListItem } from "./interfaces/IPageAdvancedElementsListItem";
+import { WeeksContext } from "../WeeksContext/WeeksContext";
 
 export type IPageAdvancedContext = {
   selectedItems: IPageAdvancedElementsListItem[];
@@ -36,10 +35,17 @@ export const PageAdvancedContextProvider: FC<PropsWithChildren<{}>> = ({
 
   const [selectedItemsIds, setSelectedItemsIds] = useState<string[]>([]);
 
-  const classesQuery = useWeekClassesQuery();
-  const classes = classesQuery.data;
+  const classesQuery = useContextSelector(
+    WeeksContext,
+    ({ weekClassesQuery }) => weekClassesQuery
+  );
 
-  const teachersQuery = useWeekTeachersQuery();
+  const teachersQuery = useContextSelector(
+    WeeksContext,
+    ({ weekTeachersQuery }) => weekTeachersQuery
+  );
+
+  const classes = classesQuery.data;
   const teachers = teachersQuery.data;
 
   const classesItems: IPageAdvancedElementsListItem[] = useMemo(
@@ -95,9 +101,9 @@ export const PageAdvancedContextProvider: FC<PropsWithChildren<{}>> = ({
       }
 
       const options = {
-        includeScore: true,
         distance: 100,
         threshold: 0.35,
+        includeScore: true,
         keys: ["data.slugs.slug", "data.fullName"],
       };
 

@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 const getNow = () => new Date();
 
 export const useNow = () => {
-  const [now, setNow] = useState(getNow);
+  const [now, setNow] = useState(() => getNow());
 
   const syncNow = useCallback(() => {
     setNow(getNow());

@@ -18,4 +18,4 @@ export const PAGE_HOME_ACTIONS = [
     icon: <DashboardCustomizeIcon fontSize={"large"} />,
     href: "/advanced",
   },
-] as const;
+];

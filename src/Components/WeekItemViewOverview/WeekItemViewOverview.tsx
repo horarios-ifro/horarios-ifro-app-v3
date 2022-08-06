@@ -1,48 +1,24 @@
 import ReportTable from "../ReportTable/ReportTable";
-import { IReportTableData } from "../ReportTable/interfaces/IReportTableData";
 import {
   createElement,
   useCallback,
   useEffect,
   useLayoutEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
-import { useContextSelector } from "use-context-selector";
-import { PageClassContext } from "./PageClassContext";
-import { getReportTableDataDaysFromWeek } from "../PageAdvanced/utils/getReportTableDataDaysFromWeek";
-import { getReportTableDataColumnFromWeekClass } from "../PageAdvanced/utils/getReportTableDataColumnFromWeekTeacher";
 import Box from "@mui/material/Box";
 import { createRoot } from "react-dom/client";
-import { getSVGDataForTable } from "../PageAdvanced/utils/getSVGDataForTable";
-import { DEFAULT_TARGET_SCALE } from "../PageAdvanced/utils/DEFAULT_TARGET_SCALE";
+import { getSVGDataForTable } from "../../Features/getSVGDataForTable";
+import { DEFAULT_TARGET_SCALE } from "../../Features/DEFAULT_TARGET_SCALE";
+import { useReportTableData } from "../WeekItemView/utils/useReportTableData";
 
-export const PageClassContentViewOverview = () => {
+const WeekItemViewOverview = () => {
   const [imgURL, setImgURL] = useState("");
 
-  const tableElRef = useRef<HTMLTableElement>(null);
-  const tableStyleElRef = useRef<HTMLStyleElement>(null);
   const outputElRef = useRef<HTMLDivElement>(null);
 
-  const weekClass = useContextSelector(
-    PageClassContext,
-    ({ weekClassQuery }) => weekClassQuery.data
-  );
-
-  const reportTableData = useMemo((): IReportTableData => {
-    if (!weekClass) {
-      return {
-        days: [],
-        columns: [],
-      };
-    }
-
-    return {
-      days: getReportTableDataDaysFromWeek(weekClass.week),
-      columns: [getReportTableDataColumnFromWeekClass(weekClass)],
-    };
-  }, [weekClass]);
+  const reportTableData = useReportTableData();
 
   const generateImageBlob = useCallback(async () => {
     const outputEl = outputElRef.current!;
@@ -129,11 +105,11 @@ export const PageClassContentViewOverview = () => {
 
   return (
     <>
-      <Box sx={{ py: 2, height: "100%", width: "100%", overflow: "auto" }}>
+      <Box sx={{ height: "100%", width: "100%", overflow: "auto" }}>
         <img
+          src={imgURL}
           alt={"Resumo da Semana"}
           style={{ width: "100%", objectFit: "contain" }}
-          src={imgURL}
         />
 
         <Box sx={{ visibility: "hidden", position: "absolute" }}>
@@ -143,3 +119,5 @@ export const PageClassContentViewOverview = () => {
     </>
   );
 };
+
+export default WeekItemViewOverview;

@@ -15,6 +15,8 @@ export type IReportTableDataTimeRange = {
   endMinute: number;
 
   text: string;
+
+  order: number;
 };
 
 export type IReportTableDataDay = {

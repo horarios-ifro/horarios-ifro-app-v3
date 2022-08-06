@@ -1,18 +1,15 @@
 import { AppContent } from "../AppContent/AppContent";
 import PageClassContent from "./PageClassContent";
-import { PageClassContextProvider } from "./PageClassContext";
 import PageClassHeader from "./PageClassHeader";
 
-const PageClass = () => {
-  return (
-    <PageClassContextProvider>
-      <PageClassHeader />
+const PageClass = () => (
+  <>
+    <PageClassHeader />
 
-      <AppContent>
-        <PageClassContent />
-      </AppContent>
-    </PageClassContextProvider>
-  );
-};
+    <AppContent>
+      <PageClassContent />
+    </AppContent>
+  </>
+);
 
 export default PageClass;

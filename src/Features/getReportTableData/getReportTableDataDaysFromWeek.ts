@@ -1,5 +1,5 @@
-import { IListWeeksItem } from "../../../Features/horarios-ifro-data-v2-client/api/resources/weeks/interfaces/IListWeeksItem";
-import { getEachWeekDay } from "../../../Features/getEachWeekDay";
+import { IListWeeksItem } from "../horarios-ifro-data-v2-client/api/resources/weeks/interfaces/IListWeeksItem";
+import { getEachWeekDay } from "../getEachWeekDay";
 import format from "date-fns/format";
 import localePTBR from "date-fns/locale/pt-BR";
 

@@ -7,9 +7,9 @@ import {
   useMemo,
   useState,
 } from "react";
-import { createContext } from "use-context-selector";
+import { createContext, useContextSelector } from "use-context-selector";
 import { IListWeekTeachersResourceResponseDto } from "../../Features/horarios-ifro-data-v2-client/api/resources/weeks/interfaces/IListWeekTeachersResourceResponseDto";
-import { useWeekTeachersQuery } from "../WeeksContext/useWeekTeachersQuery";
+import { WeeksContext } from "../WeeksContext/WeeksContext";
 
 const FuseModule = import("fuse.js").then((mod) => mod.default);
 
@@ -34,7 +34,10 @@ export const PageTeachersContextProvider: FC<PropsWithChildren<{}>> = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const teachersQuery = useWeekTeachersQuery();
+  const teachersQuery = useContextSelector(
+    WeeksContext,
+    ({ weekTeachersQuery }) => weekTeachersQuery
+  );
 
   const allTeachers = useMemo(
     () => teachersQuery.data ?? [],

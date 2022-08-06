@@ -7,7 +7,6 @@ export const getEachWeekDay = (week?: IListWeeksItem) => {
   }
 
   const startDay = new Date(week.startsAt);
-
   const endDay = new Date(week.endsAt);
 
   return eachDayOfInterval({ start: startDay, end: endDay }).sort(

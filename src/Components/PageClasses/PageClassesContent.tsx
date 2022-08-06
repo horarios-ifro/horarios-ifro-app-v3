@@ -175,13 +175,13 @@ const PageClassesContent = () => {
           <Box sx={{ height: "100%", overflow: "auto" }} ref={containerElRef}>
             <Box>
               <Box ref={stepCourseElRef}>
-                <Typography variant="h4" sx={{ mb: 3 }}>
+                <Typography variant="h4" sx={{ mb: 3, pt: 2 }}>
                   Curso
                 </Typography>
                 <Box
                   className={classes.courseContainer}
                   sx={{
-                    gap: 2,
+                    gap: 1,
                     display: "grid",
                     gridTemplateRows: "repeat(1, auto)",
                     gridTemplateColumns: "repeat(3, 1fr)",
@@ -193,23 +193,14 @@ const PageClassesContent = () => {
                       <Button
                         disableRipple
                         variant="outlined"
-                        sx={{ width: "100%", position: "relative", py: 8 }}
+                        sx={{ width: "100%", position: "relative", py: 4 }}
                         onClick={() => updateSelectedCourse(course.id)}
                       >
-                        <Box
-                          sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                          }}
-                        >
-                          <Box>
-                            <Radio
-                              disableRipple
-                              checked={selectedCourse === course.id}
-                            />
-                          </Box>
-                          <Typography>{course.label}</Typography>
-                        </Box>
+                        <Radio
+                          disableRipple
+                          checked={selectedCourse === course.id}
+                        />
+                        <Typography>{course.label}</Typography>
                       </Button>
                     </Fragment>
                   ))}
@@ -233,7 +224,7 @@ const PageClassesContent = () => {
                 <Box
                   className={classes.periodContainer}
                   sx={{
-                    gap: 2,
+                    gap: 1,
                     display: "grid",
                     gridTemplateRows: "repeat(1, auto)",
                     gridTemplateColumns: "repeat(3, 1fr)",
@@ -245,7 +236,7 @@ const PageClassesContent = () => {
                       <Button
                         disableRipple
                         variant="outlined"
-                        sx={{ width: "100%", py: 8 }}
+                        sx={{ width: "100%", py: 4 }}
                         onClick={() => updateSelectedPeriod(course.id)}
                       >
                         <Radio
@@ -276,7 +267,7 @@ const PageClassesContent = () => {
                 <Box
                   className={classes.labelContainer}
                   sx={{
-                    gap: 2,
+                    gap: 1,
                     display: "grid",
                     gridTemplateRows: "repeat(1, auto)",
                     gridTemplateColumns: "repeat(2, 1fr)",
@@ -288,7 +279,7 @@ const PageClassesContent = () => {
                       <Button
                         disableRipple
                         variant="outlined"
-                        sx={{ width: "100%", py: 8 }}
+                        sx={{ width: "100%", py: 4 }}
                         onClick={() => updateSelectedLabel(course.id)}
                       >
                         <Radio
