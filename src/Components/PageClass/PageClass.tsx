@@ -1,16 +1,17 @@
 import { AppContent } from "../AppContent/AppContent";
-import { Header } from "../Header/Header";
 import PageClassContent from "./PageClassContent";
+import { PageClassContextProvider } from "./PageClassContext";
+import PageClassHeader from "./PageClassHeader";
 
 const PageClass = () => {
   return (
-    <>
-      <Header />
+    <PageClassContextProvider>
+      <PageClassHeader />
 
       <AppContent>
         <PageClassContent />
       </AppContent>
-    </>
+    </PageClassContextProvider>
   );
 };
 

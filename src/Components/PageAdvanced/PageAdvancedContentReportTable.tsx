@@ -5,7 +5,6 @@ const ReportTable = loadable(() => import("../ReportTable/ReportTable"));
 
 const PageAdvancedContentReportTable = () => {
   const { reportTableData } = useSelectedItemsReportTableData();
-
   return (
     <>
       <ReportTable data={reportTableData} />

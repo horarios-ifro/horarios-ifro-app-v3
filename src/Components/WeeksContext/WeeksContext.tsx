@@ -30,9 +30,17 @@ export const WeeksContextProvider = ({ children }: { children: any }) => {
 
   const weeks = useMemo(() => allWeeks.slice(-2), [allWeeks]);
 
+  const now = useMemo(() => new Date(), []);
+
   useEffect(() => {
     if (weeks.length > 0 && selectedWeek === null) {
-      setSelectedWeek(weeks.slice(-1)[0].id);
+      const targetWeek = weeks.find((i, idx, arr) => {
+        const startDate = new Date(i.startsAt);
+        const endDate = new Date(i.endsAt);
+
+        return (now >= startDate && now < endDate) || idx === arr.length - 1;
+      })!;
+      setSelectedWeek(targetWeek.id);
     }
   }, [weeks, selectedWeek]);
 

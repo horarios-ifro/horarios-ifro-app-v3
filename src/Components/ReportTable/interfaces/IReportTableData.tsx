@@ -24,9 +24,9 @@ export type IReportTableDataDay = {
 };
 
 export type IReportTableData = {
-  columns: IReportTableDataColumn[];
-
   days: IReportTableDataDay[];
+
+  columns: IReportTableDataColumn[];
 
   dayTimeRanges?: IReportTableDataTimeRange[];
 };

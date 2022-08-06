@@ -6,15 +6,14 @@ import { createElement, useCallback, useLayoutEffect, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import ReportTable from "../ReportTable/ReportTable";
 import PageAdvancedContentReportTable from "./PageAdvancedContentReportTable";
-import { generateSVGBlob } from "./utils/generateSVGBlob";
 import { getSVGDataForTable } from "./utils/getSVGDataForTable";
 import { useSelectedItemsReportTableData } from "./utils/useSelectedItemsReportTableData";
 import { DEFAULT_TARGET_SCALE } from "./utils/DEFAULT_TARGET_SCALE";
 
 const PageAdvancedContentPaneReport = () => {
-  const outputRef = useRef<HTMLDivElement>(null);
-
   const { reportTableData } = useSelectedItemsReportTableData();
+
+  const outputRef = useRef<HTMLDivElement>(null);
 
   const generateImageBlob = useCallback(async () => {
     const outputRefEl = outputRef.current!;
@@ -43,9 +42,9 @@ const PageAdvancedContentPaneReport = () => {
       rootEl.querySelector("style")!
     );
 
-    const svgBlob = generateSVGBlob(svgData);
-
-    const svgURL = URL.createObjectURL(svgBlob);
+    const svgURL = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(
+      svgData
+    )}`;
 
     const img = new Image();
 
@@ -72,8 +71,6 @@ const PageAdvancedContentPaneReport = () => {
         reject();
       }, "image/png")
     );
-
-    URL.revokeObjectURL(svgURL);
 
     outputRefEl.removeChild(rootEl);
 
