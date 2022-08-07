@@ -13,6 +13,7 @@ import { COURSES_ID_LABELS } from "./utils/COURSES_ID_LABELS";
 import { COURSES_YEAR_LABELS } from "./utils/COURSES_YEAR_LABELS";
 import PageLoading from "../PageLoading/PageLoading";
 import { useNavigate } from "react-router-dom";
+import { COURSES_LABEL_LABELS } from "./utils/COURSES_LABEL_LABELS";
 
 export type IPageClassesContext = {
   selectedCourse: string | null;
@@ -76,7 +77,7 @@ export const PageClassesContextProvider: FC<PropsWithChildren<{}>> = ({
       : Object.keys(availableClasses[targetCourse])[0];
 
     return Object.values(availableClasses[targetCourse][targetPeriod]).map(
-      (id) => ({ id, label: id })
+      (id) => ({ id, label: COURSES_LABEL_LABELS[id.toLocaleUpperCase()] })
     );
   }, [availableClasses, availableCourses, selectedCourse, selectedPeriod]);
 

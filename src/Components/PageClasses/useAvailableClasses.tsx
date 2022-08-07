@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useContextSelector } from "use-context-selector";
 import { WeeksContext } from "../WeeksContext/WeeksContext";
-import { PLACEHOLDER_WEEK_CLASSES } from "./PLACEHOLDER_WEEK_CLASSES";
+import { PLACEHOLDER_WEEK_CLASSES } from "./utils/PLACEHOLDER_WEEK_CLASSES";
 
 export const useAvailableClasses = () => {
   const weekClassesQuery = useContextSelector(

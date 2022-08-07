@@ -17,7 +17,6 @@ const PageAdvancedContentPaneReport = () => {
 
   const handleExportReport = useCallback(async () => {
     const imgBlob = await generateImageBlob();
-
     if (imgBlob) {
       saveAs(imgBlob, "relatorio.png");
     }

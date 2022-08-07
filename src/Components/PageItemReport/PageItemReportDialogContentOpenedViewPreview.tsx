@@ -1,12 +1,11 @@
+import DownloadIcon from "@mui/icons-material/Download";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useContextSelector } from "use-context-selector";
 import Loading from "../Loading/Loading";
 import { WeekItemViewOverviewContext } from "../WeekItemViewOverview/WeekItemViewOverviewContext";
-import { saveAs } from "file-saver";
-import DownloadIcon from "@mui/icons-material/Download";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 export const PageItemReportDialogContentOpenedViewPreview = () => {
   const imgURL = useContextSelector(
@@ -22,18 +21,6 @@ export const PageItemReportDialogContentOpenedViewPreview = () => {
   useEffect(() => {
     void handleGenerateImgURL();
   }, [handleGenerateImgURL]);
-
-  const handleOpenNewTab = useCallback(() => {
-    if (imgURL) {
-      window.open(imgURL, "_blank");
-    }
-  }, [imgURL]);
-
-  const handleDownload = useCallback(() => {
-    if (imgURL) {
-      saveAs(imgURL, "relatorio.png");
-    }
-  }, [imgURL]);
 
   if (!imgURL) {
     return <Loading />;
@@ -51,17 +38,18 @@ export const PageItemReportDialogContentOpenedViewPreview = () => {
       }}
     >
       <Box sx={{ flex: 1, overflow: "hidden" }}>
-        <img
-          alt={""}
-          src={imgURL}
-          onClick={handleOpenNewTab}
-          style={{
-            width: "100%",
-            height: "100%",
-            cursor: "pointer",
-            objectFit: "contain",
-          }}
-        />
+        <a href={imgURL}>
+          <img
+            alt={""}
+            src={imgURL}
+            style={{
+              width: "100%",
+              height: "100%",
+              cursor: "pointer",
+              objectFit: "contain",
+            }}
+          />
+        </a>
       </Box>
 
       <Box
@@ -73,16 +61,18 @@ export const PageItemReportDialogContentOpenedViewPreview = () => {
         }}
       >
         <Button
+          href={imgURL}
           variant="contained"
-          onClick={handleDownload}
+          download="relatorio.png"
           startIcon={<DownloadIcon />}
         >
           Baixar Imagem
         </Button>
 
         <Button
+          href={imgURL}
+          target="_blank"
           variant="contained"
-          onClick={handleOpenNewTab}
           startIcon={<OpenInNewIcon />}
         >
           Abrir em Nova Guia
