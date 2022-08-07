@@ -54,9 +54,9 @@ export const PageItemReportDialogContentOpenedViewPreview = () => {
 
       <Box
         sx={{
+          gap: 1,
           display: "flex",
           justifyContent: "center",
-          gap: 1,
           flexWrap: "wrap",
         }}
       >

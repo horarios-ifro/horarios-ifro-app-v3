@@ -1,0 +1,12 @@
+.courseButton {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 530px) {
+  .courseButton {
+    flex-direction: row;
+  }
+}

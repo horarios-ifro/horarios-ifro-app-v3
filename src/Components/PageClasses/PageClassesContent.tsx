@@ -7,6 +7,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { useContextSelector } from "use-context-selector";
 import AppContainer from "../AppContainer/AppContainer";
 import { PageClassesContext } from "./PageClassesContext";
+import * as classes from "./PageClasses.module.css";
 
 const PageClassesContent = () => {
   const selectedCourse = useContextSelector(
@@ -187,11 +188,14 @@ const PageClassesContent = () => {
                 >
                   {availableCourses.map((course) => (
                     <ToggleButton
-                      key={course.id}
                       disableRipple
+                      key={course.id}
                       value={course.id}
                     >
-                      {course.label}
+                      <Box className={classes.courseButton}>
+                        <span>{course.emoji}</span>
+                        <span>{course.label}</span>
+                      </Box>
                     </ToggleButton>
                   ))}
                 </ToggleButtonGroup>

@@ -14,6 +14,7 @@ import { COURSES_YEAR_LABELS } from "./utils/COURSES_YEAR_LABELS";
 import PageLoading from "../PageLoading/PageLoading";
 import { useNavigate } from "react-router-dom";
 import { COURSES_LABEL_LABELS } from "./utils/COURSES_LABEL_LABELS";
+import { COURSES_ID_EMOJIS } from "./utils/COURSES_ID_EMOJIS";
 
 export type IPageClassesContext = {
   selectedCourse: string | null;
@@ -25,7 +26,7 @@ export type IPageClassesContext = {
   selectedLabel: string | null;
   setSelectedLabel: Dispatch<SetStateAction<string | null>>;
 
-  availableCourses: { id: string; label: string }[];
+  availableCourses: { id: string; label: string; emoji: string }[];
   availablePeriods: { id: string; label: string }[];
   availableLabels: { id: string; label: string }[];
 };
@@ -48,6 +49,7 @@ export const PageClassesContextProvider: FC<PropsWithChildren<{}>> = ({
       Object.keys(availableClasses).map((id) => ({
         id,
         label: COURSES_ID_LABELS[id],
+        emoji: COURSES_ID_EMOJIS[id],
       })),
     [availableClasses]
   );
