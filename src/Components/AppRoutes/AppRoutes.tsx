@@ -3,6 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import { lazy } from "@loadable/component";
 import { Suspense } from "react";
 import PageLoading from "../PageLoading/PageLoading";
+import { LegacyCoursesPage } from "./LegacyCoursesPage";
+import { LegacyTeachersPage } from "./LegacyTeachersPage";
 
 const PageClasses = lazy(() => import("../PageClasses/PageClasses"));
 
@@ -18,6 +20,19 @@ const AppRoutes = () => (
   <>
     <Suspense fallback={<PageLoading />}>
       <Routes>
+        {/* legacy routes */}
+
+        <Route path="courses">
+          <Route path=":course" element={<LegacyCoursesPage />} />
+          <Route path=":course/:year" element={<LegacyCoursesPage />} />
+          <Route path=":course/:year/:label" element={<LegacyCoursesPage />} />
+          <Route path="" element={<LegacyCoursesPage />} />
+        </Route>
+
+        <Route path="teachers/search" element={<LegacyTeachersPage />} />
+
+        {/* end legacy routes */}
+
         <Route path={"/classes"} element={<PageClasses />} />
 
         <Route path={"/classes/:classId"}>

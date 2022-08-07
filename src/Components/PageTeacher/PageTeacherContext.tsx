@@ -21,11 +21,7 @@ export const PageTeacherContextProvider: FC<
   return (
     <>
       <WeekItemViewContextProvider mode={"teacher"} dataQuery={dataQuery}>
-        <PageTeacherContext.Provider
-          value={{
-            dataQuery,
-          }}
-        >
+        <PageTeacherContext.Provider value={{ dataQuery }}>
           {children}
         </PageTeacherContext.Provider>
       </WeekItemViewContextProvider>
