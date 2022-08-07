@@ -1,15 +1,11 @@
-import WeekItemView from "../WeekItemView/WeekItemView";
-import { WeekItemViewContextProvider } from "../WeekItemView/WeekItemViewContext";
-import { usePageClassWeekClassQuery } from "./utils/usePageClassWeekClassQuery";
+import loadable from "@loadable/component";
+
+const WeekItemView = loadable(() => import("../WeekItemView/WeekItemView"));
 
 const PageClassContent = () => {
-  const dataQuery = usePageClassWeekClassQuery();
-
   return (
     <>
-      <WeekItemViewContextProvider mode={"class"} dataQuery={dataQuery}>
-        <WeekItemView />
-      </WeekItemViewContextProvider>
+      <WeekItemView />
     </>
   );
 };

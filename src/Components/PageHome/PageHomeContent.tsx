@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import * as styles from "./PageHome.module.css";
-import { Fragment } from "react";
-import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import { Fragment } from "react";
+import { useNavigate } from "react-router-dom";
+import AppContainer from "../AppContainer/AppContainer";
+import * as styles from "./PageHome.module.css";
 import { PAGE_HOME_ACTIONS } from "./utils/PAGE_HOME_ACTIONS";
 
 const PageHomeContent = () => {
@@ -13,7 +13,7 @@ const PageHomeContent = () => {
 
   return (
     <>
-      <Container sx={{ height: "100%" }}>
+      <AppContainer>
         <Box py={3} className={styles.actions}>
           {PAGE_HOME_ACTIONS.map((action) => (
             <Fragment key={action.label}>
@@ -48,7 +48,7 @@ const PageHomeContent = () => {
             </Fragment>
           ))}
         </Box>
-      </Container>
+      </AppContainer>
     </>
   );
 };

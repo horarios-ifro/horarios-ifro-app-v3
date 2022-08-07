@@ -2,7 +2,7 @@ import { Header } from "../Header/Header";
 
 const PageAdvancedHeader = () => (
   <>
-    <Header />
+    <Header title="Avançado" goBackTo={"/"} />
   </>
 );
 

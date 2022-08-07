@@ -1,7 +1,7 @@
 import { Header } from "../Header/Header";
 
 const PageHomeHeader = () => {
-  return <Header />;
+  return <Header title="Início" />;
 };
 
 export default PageHomeHeader;

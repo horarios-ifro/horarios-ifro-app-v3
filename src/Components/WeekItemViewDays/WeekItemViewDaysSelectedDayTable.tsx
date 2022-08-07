@@ -1,5 +1,4 @@
 import { useContextSelector } from "use-context-selector";
-import { WeekItemViewContext } from "../WeekItemView/WeekItemViewContext";
 import { Fragment, useMemo } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -88,7 +87,11 @@ const WeekItemViewDaysSelectedDayTable = () => {
                           item.weekDay === weekDayOrder
                       );
 
-                      return <TableCell>{targetItem?.text ?? "-"}</TableCell>;
+                      return (
+                        <TableCell key={column.header}>
+                          {targetItem?.text ?? "-"}
+                        </TableCell>
+                      );
                     })}
                   </TableRow>
 

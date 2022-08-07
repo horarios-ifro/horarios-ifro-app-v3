@@ -2,7 +2,11 @@ import { Header } from "../Header/Header";
 
 const PageTeachersHeader = () => (
   <>
-    <Header />
+    <Header
+      goBackTo={"/"}
+      title="Professores"
+      containerProps={{ maxWidth: "sm" }}
+    />
   </>
 );
 

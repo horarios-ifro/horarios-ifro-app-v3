@@ -2,7 +2,7 @@ import { Header } from "../Header/Header";
 
 const PageClassesHeader = () => (
   <>
-    <Header />
+    <Header goBackTo={"/"} title="Turmas" containerProps={{ maxWidth: "sm" }} />
   </>
 );
 

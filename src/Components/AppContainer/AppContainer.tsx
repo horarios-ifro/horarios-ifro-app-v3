@@ -1,10 +1,16 @@
 import { FC, PropsWithChildren } from "react";
-import Container from "@mui/material/Container";
+import Container, { ContainerProps } from "@mui/material/Container";
 
-const AppContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
+type IAppContainerProps = PropsWithChildren<{
+  containerProps?: ContainerProps;
+}>;
+
+const AppContainer: FC<IAppContainerProps> = ({ children, containerProps }) => {
   return (
     <>
-      <Container sx={{ height: "100%" }}>{children}</Container>
+      <Container {...containerProps} sx={{ height: "100%" }}>
+        {children}
+      </Container>
     </>
   );
 };

@@ -166,7 +166,7 @@ const PageClassesContent = () => {
 
   return (
     <>
-      <AppContainer>
+      <AppContainer containerProps={{ maxWidth: "sm" }}>
         <Box
           ref={containerWrapperElRef}
           sx={{ height: "100%", overflow: "hidden" }}

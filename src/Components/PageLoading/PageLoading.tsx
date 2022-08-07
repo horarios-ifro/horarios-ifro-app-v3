@@ -4,7 +4,7 @@ import Loading from "../Loading/Loading";
 
 const PageLoading = () => (
   <>
-    <Header />
+    <Header goBackTo={-1} title="Carregando..." />
 
     <AppContent>
       <Loading />

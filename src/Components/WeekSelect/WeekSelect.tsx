@@ -10,10 +10,12 @@ import { WeeksContext } from "../WeeksContext/WeeksContext";
 export type IWeekSelectProps = {
   showLabel?: boolean;
   showLatestLabel?: boolean;
+
+  disabled?: boolean;
 };
 
 const WeekSelect: FC<IWeekSelectProps> = (props) => {
-  const { showLabel = true, showLatestLabel = true } = props;
+  const { showLabel = true, showLatestLabel = true, disabled = false } = props;
 
   const selectedWeek = useContextSelector(
     WeeksContext,
@@ -34,7 +36,12 @@ const WeekSelect: FC<IWeekSelectProps> = (props) => {
 
   return (
     <>
-      <FormControl size={"medium"} variant="standard" style={{ width: "100%" }}>
+      <FormControl
+        size={"medium"}
+        variant="standard"
+        disabled={disabled}
+        style={{ width: "100%" }}
+      >
         {showLabel && (
           <InputLabel id="select-week-label">Horário Semanal</InputLabel>
         )}

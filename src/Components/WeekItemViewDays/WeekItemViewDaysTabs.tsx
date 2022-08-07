@@ -1,13 +1,10 @@
 import { useContextSelector } from "use-context-selector";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import format from "date-fns/format";
 import { dateFNSLocale } from "../../Features/date-fns-locale";
-import { WeekDayTab } from "./interfaces/WeekDayTab";
-import { WeekItemViewContext } from "../WeekItemView/WeekItemViewContext";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNow } from "../useNow";
 import isSameDay from "date-fns/isSameDay";
 import { WeekItemViewDaysContext } from "./WeekItemViewDaysContext";
@@ -32,6 +29,11 @@ export const WeekItemViewDaysTabs = () => {
     ({ selectedTab }) => selectedTab
   );
 
+  const isLoading = useContextSelector(
+    WeekItemViewDaysContext,
+    ({ isLoading }) => isLoading
+  );
+
   const eachWeekDay = useContextSelector(
     WeekItemViewDaysContext,
     ({ eachWeekDay }) => eachWeekDay
@@ -47,6 +49,14 @@ export const WeekItemViewDaysTabs = () => {
     [now]
   );
 
+  const [eachWeekDayCache, setEachWeekDayCache] = useState(() => eachWeekDay);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setEachWeekDayCache(eachWeekDay);
+    }
+  }, [eachWeekDay, isLoading]);
+
   return (
     <>
       <Box sx={{ display: "flex", overflow: "hidden", width: "100%" }}>
@@ -58,9 +68,10 @@ export const WeekItemViewDaysTabs = () => {
           allowScrollButtonsMobile
           onChange={handleSelectedTabChange}
         >
-          {eachWeekDay.map((day) => (
+          {eachWeekDayCache.map((day) => (
             <Tab
               key={String(day)}
+              disabled={isLoading}
               value={day.getDay() - 1}
               label={formatDayLabel(day)}
             />

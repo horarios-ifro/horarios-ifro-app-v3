@@ -19,6 +19,8 @@ import { WeekItemViewContext } from "../WeekItemView/WeekItemViewContext";
 import { WeekDayTab } from "./interfaces/WeekDayTab";
 
 export type IWeekItemViewDaysContext = {
+  isLoading: boolean;
+
   eachWeekDay: Date[];
 
   selectedTab: WeekDayTab;
@@ -37,6 +39,11 @@ export const WeekItemViewDaysContextProvider: FC<PropsWithChildren<{}>> = (
 ) => {
   const { children } = props;
 
+  const isLoading = useContextSelector(
+    WeekItemViewContext,
+    ({ dataQuery }) => dataQuery.isLoading
+  );
+
   const data = useContextSelector(
     WeekItemViewContext,
     ({ dataQuery }) => dataQuery.data
@@ -44,7 +51,13 @@ export const WeekItemViewDaysContextProvider: FC<PropsWithChildren<{}>> = (
 
   const [selectedTab, setSelectedTab] = useState(WeekDayTab.SEG);
 
-  const eachWeekDay = useMemo(() => getEachWeekDay(data?.week), [data]);
+  const eachWeekDay = useMemo(() => {
+    const week = data?.week;
+
+    return week
+      ? getEachWeekDay(week)
+      : Array.from({ length: 6 }).map((_, idx) => new Date(2022, 7, 1 + idx));
+  }, [data]);
 
   const dayTimeRanges = DEFAULT_DAY_TIME_RANGES;
 
@@ -75,6 +88,7 @@ export const WeekItemViewDaysContextProvider: FC<PropsWithChildren<{}>> = (
   return (
     <WeekItemViewDaysContext.Provider
       value={{
+        isLoading,
         eachWeekDay,
         selectedTab,
         dayTimeRanges,

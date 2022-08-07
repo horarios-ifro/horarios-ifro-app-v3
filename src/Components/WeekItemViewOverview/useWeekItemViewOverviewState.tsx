@@ -1,24 +1,22 @@
-import ReportTable from "../ReportTable/ReportTable";
 import {
   createElement,
   useCallback,
-  useEffect,
   useLayoutEffect,
   useRef,
   useState,
 } from "react";
-import Box from "@mui/material/Box";
 import { createRoot } from "react-dom/client";
-import { getSVGDataForTable } from "../../Features/getSVGDataForTable";
 import { DEFAULT_TARGET_SCALE } from "../../Features/DEFAULT_TARGET_SCALE";
-import { useReportTableData } from "../WeekItemView/utils/useReportTableData";
+import { getSVGDataForTable } from "../../Features/getSVGDataForTable";
+import { IReportTableData } from "../ReportTable/interfaces/IReportTableData";
+import ReportTable from "../ReportTable/ReportTable";
 
-const WeekItemViewOverview = () => {
+export const useWeekItemViewOverviewState = (
+  reportTableData: IReportTableData
+) => {
   const [imgURL, setImgURL] = useState("");
 
   const outputElRef = useRef<HTMLDivElement>(null);
-
-  const reportTableData = useReportTableData();
 
   const generateImageBlob = useCallback(async () => {
     const outputEl = outputElRef.current!;
@@ -99,25 +97,5 @@ const WeekItemViewOverview = () => {
     }
   }, [generateImageBlob]);
 
-  useEffect(() => {
-    handleGenerateImgURL().then(() => {});
-  }, [handleGenerateImgURL]);
-
-  return (
-    <>
-      <Box sx={{ height: "100%", width: "100%", overflow: "auto" }}>
-        <img
-          src={imgURL}
-          alt={"Resumo da Semana"}
-          style={{ width: "100%", objectFit: "contain" }}
-        />
-
-        <Box sx={{ visibility: "hidden", position: "absolute" }}>
-          <Box ref={outputElRef} />
-        </Box>
-      </Box>
-    </>
-  );
+  return { outputElRef, generateImageBlob, handleGenerateImgURL, imgURL };
 };
-
-export default WeekItemViewOverview;

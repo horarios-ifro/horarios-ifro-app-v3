@@ -2,127 +2,35 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import { saveAs } from "file-saver";
-import { createElement, useCallback, useLayoutEffect, useRef } from "react";
-import { createRoot } from "react-dom/client";
-import ReportTable from "../ReportTable/ReportTable";
+import { useCallback } from "react";
 import PageAdvancedContentReportTable from "./PageAdvancedContentReportTable";
-import { getSVGDataForTable } from "../../Features/getSVGDataForTable";
 import { useSelectedItemsReportTableData } from "./utils/useSelectedItemsReportTableData";
-import { DEFAULT_TARGET_SCALE } from "../../Features/DEFAULT_TARGET_SCALE";
+import DownloadIcon from "@mui/icons-material/Download";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import { useWeekItemViewOverviewState } from "../WeekItemViewOverview/useWeekItemViewOverviewState";
 
 const PageAdvancedContentPaneReport = () => {
   const { reportTableData } = useSelectedItemsReportTableData();
 
-  const outputRef = useRef<HTMLDivElement>(null);
-
-  const generateImageBlob = useCallback(async () => {
-    const outputRefEl = outputRef.current!;
-
-    const rootEl = document.createElement("div");
-    outputRefEl.appendChild(rootEl);
-
-    const root = createRoot(rootEl);
-
-    await new Promise<string>((resolve) => {
-      root.render(
-        <>
-          {createElement(() => {
-            useLayoutEffect(() => {
-              resolve(outputRefEl.innerHTML);
-            }, []);
-            return null;
-          })}
-          <ReportTable data={reportTableData} />
-        </>
-      );
-    });
-
-    const svgData = getSVGDataForTable(
-      rootEl.querySelector("table")!,
-      rootEl.querySelector("style")!
-    );
-
-    const svgURL = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(
-      svgData
-    )}`;
-
-    const img = new Image();
-
-    await new Promise((resolve, reject) => {
-      img.addEventListener("load", resolve);
-      img.addEventListener("error", reject);
-      img.src = svgURL;
-    });
-
-    const canvas = document.createElement("canvas");
-
-    canvas.width = Math.ceil(img.width * DEFAULT_TARGET_SCALE);
-    canvas.height = Math.ceil(img.height * DEFAULT_TARGET_SCALE);
-
-    const ctx = canvas.getContext("2d")!;
-
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-    const finalImgBlob = await new Promise<Blob>((resolve, reject) =>
-      canvas.toBlob((blob: Blob | null) => {
-        if (blob) {
-          resolve(blob);
-        }
-        reject();
-      }, "image/png")
-    );
-
-    outputRefEl.removeChild(rootEl);
-
-    return finalImgBlob;
-  }, [reportTableData, outputRef]);
+  const { outputElRef, generateImageBlob } =
+    useWeekItemViewOverviewState(reportTableData);
 
   const handleExportReport = useCallback(async () => {
     const imgBlob = await generateImageBlob();
-    saveAs(imgBlob, "relatorio.png");
+
+    if (imgBlob) {
+      saveAs(imgBlob, "relatorio.png");
+    }
   }, [generateImageBlob]);
 
   const handleViewImage = useCallback(async () => {
     const imgBlob = await generateImageBlob();
-    const imgURL = URL.createObjectURL(imgBlob);
-    window.open(imgURL, "_blank");
+
+    if (imgBlob) {
+      const imgURL = URL.createObjectURL(imgBlob);
+      window.open(imgURL, "_blank");
+    }
   }, [generateImageBlob]);
-
-  // const handleOpenNewTab = useCallback(async () => {
-  //   const outputRefEl = outputRef.current!;
-
-  //   const rootEl = document.createElement("div");
-  //   outputRefEl.appendChild(rootEl);
-
-  //   const root = createRoot(rootEl);
-
-  //   await new Promise<string>((resolve) => {
-  //     root.render(
-  //       <>
-  //         {createElement(() => {
-  //           useLayoutEffect(() => {
-  //             resolve(outputRefEl.innerHTML);
-  //           }, []);
-  //           return null;
-  //         })}
-  //         <ReportTable data={reportTableData} />
-  //       </>
-  //     );
-  //   });
-
-  //   const svgData = getSVGDataForTable(
-  //     rootEl.querySelector("table")!,
-  //     rootEl.querySelector("style")!
-  //   );
-
-  //   const svgBlob = generateSVGBlob(svgData);
-
-  //   const svgURL = URL.createObjectURL(svgBlob);
-
-  //   window.open(svgURL, "_blank");
-
-  //   outputRefEl.removeChild(rootEl);
-  // }, [reportTableData, outputRef]);
 
   return (
     <>
@@ -140,6 +48,7 @@ const PageAdvancedContentPaneReport = () => {
             size={"small"}
             color={"primary"}
             variant={"outlined"}
+            startIcon={<DownloadIcon />}
             onClick={() => handleExportReport()}
           >
             Exportar
@@ -149,22 +58,14 @@ const PageAdvancedContentPaneReport = () => {
             size={"small"}
             color={"primary"}
             variant={"contained"}
+            startIcon={<OpenInNewIcon />}
             onClick={() => handleViewImage()}
           >
             Ver como Imagem
           </Button>
 
-          {/* <Button
-            variant={"contained"}
-            size={"small"}
-            color={"primary"}
-            onClick={() => handleOpenNewTab()}
-          >
-            Abrir em Nova Guia
-          </Button> */}
-
           <div style={{ visibility: "hidden", position: "absolute" }}>
-            <div ref={outputRef}></div>
+            <div ref={outputElRef}></div>
           </div>
         </Box>
 

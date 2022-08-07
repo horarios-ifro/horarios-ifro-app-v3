@@ -20,11 +20,17 @@ const AppRoutes = () => (
       <Routes>
         <Route path={"/classes"} element={<PageClasses />} />
 
-        <Route path={"/classes/:classId"} element={<PageClass />} />
+        <Route path={"/classes/:classId"}>
+          <Route path="" element={<PageClass />} />
+          <Route path="report" element={<PageClass />} />
+        </Route>
 
         <Route path={"/teachers"} element={<PageTeachers />} />
 
-        <Route path={"/teachers/:teacherId"} element={<PageTeacher />} />
+        <Route path={"/teachers/:teacherId"}>
+          <Route path="" element={<PageTeacher />} />
+          <Route path="report" element={<PageTeacher />} />
+        </Route>
 
         <Route path={"/advanced"} element={<PageAdvanced />} />
 
