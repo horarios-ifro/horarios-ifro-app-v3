@@ -54,7 +54,13 @@ export const PageItemReportDialogContentOpenedViewPreview = () => {
         <img
           alt={""}
           src={imgURL}
-          style={{ width: "100%", height: "100%", objectFit: "contain" }}
+          onClick={handleOpenNewTab}
+          style={{
+            width: "100%",
+            height: "100%",
+            cursor: "pointer",
+            objectFit: "contain",
+          }}
         />
       </Box>
 

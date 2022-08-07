@@ -4,6 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import { useContextSelector } from "use-context-selector";
 import { PageClassContext } from "./PageClassContext";
 import { useNavigate } from "react-router-dom";
+import { usePageClassPathReport } from "./usePageClassPathReport";
 
 const PageClassHeader = () => {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ const PageClassHeader = () => {
   const hasData = useContextSelector(PageClassContext, ({ dataQuery }) =>
     Boolean(dataQuery.data)
   );
+
+  const pathReport = usePageClassPathReport();
 
   return (
     <>
@@ -23,7 +26,7 @@ const PageClassHeader = () => {
             <IconButton
               color="inherit"
               disabled={!hasData}
-              onClick={() => navigate("report")}
+              onClick={() => navigate(pathReport)}
             >
               <SummarizeIcon />
             </IconButton>

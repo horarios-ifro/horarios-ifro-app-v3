@@ -1,10 +1,15 @@
 import { PageItemReportContextProvider } from "../PageItemReport/PageItemReportContext";
 import { PageItemReportDialog } from "../PageItemReport/PageItemReportDialog";
+import { usePageTeacherPathReport } from "./usePageTeacherPathReport";
 
-const PageTeacherReport = () => (
-  <PageItemReportContextProvider reportPath="/teachers/:id/report">
-    <PageItemReportDialog />
-  </PageItemReportContextProvider>
-);
+const PageTeacherReport = () => {
+  const pathReport = usePageTeacherPathReport();
+
+  return (
+    <PageItemReportContextProvider reportPath={pathReport}>
+      <PageItemReportDialog />
+    </PageItemReportContextProvider>
+  );
+};
 
 export default PageTeacherReport;

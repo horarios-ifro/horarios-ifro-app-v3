@@ -19,7 +19,7 @@ const PageTeachersContent = () => (
         <Box>
           <PageTeachersContentSearchField />
         </Box>
-        <Box sx={{ flex: "1", overflow: "auto" }}>
+        <Box sx={{ flex: "1", overflow: "hidden" }}>
           <PageTeachersContentResults />
         </Box>
       </Box>

@@ -4,6 +4,7 @@ import SummarizeIcon from "@mui/icons-material/Summarize";
 import { useNavigate } from "react-router-dom";
 import { useContextSelector } from "use-context-selector";
 import { PageTeacherContext } from "./PageTeacherContext";
+import { usePageTeacherPathReport } from "./usePageTeacherPathReport";
 
 const PageTeacherHeader = () => {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ const PageTeacherHeader = () => {
   const hasData = useContextSelector(PageTeacherContext, ({ dataQuery }) =>
     Boolean(dataQuery.data)
   );
+
+  const pathReport = usePageTeacherPathReport();
 
   return (
     <>
@@ -23,7 +26,7 @@ const PageTeacherHeader = () => {
             <IconButton
               color="inherit"
               disabled={!hasData}
-              onClick={() => navigate("report")}
+              onClick={() => navigate(pathReport)}
             >
               <SummarizeIcon />
             </IconButton>

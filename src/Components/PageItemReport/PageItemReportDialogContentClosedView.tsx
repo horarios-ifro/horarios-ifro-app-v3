@@ -16,7 +16,7 @@ export const PageItemReportDialogContentClosedView = () => {
   return (
     <>
       <DialogContent sx={{ overflow: "hidden" }}>
-        <Box sx={{ width: "100%", height: "100%" }}>
+        <Box sx={{ width: "100%", height: "100%", overflow: "hidden" }}>
           <Loading />
         </Box>
       </DialogContent>
