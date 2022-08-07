@@ -1,4 +1,5 @@
 import { AppContent } from "../AppContent/AppContent";
+import Footer from "../Footer/Footer";
 import PageTeacherContent from "./PageTeacherContent";
 import PageTeacherHeader from "./PageTeacherHeader";
 

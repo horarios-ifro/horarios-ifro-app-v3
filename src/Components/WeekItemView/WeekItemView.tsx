@@ -5,7 +5,15 @@ import { WeekItemViewDaysContextProvider } from "../WeekItemViewDays/WeekItemVie
 const WeekItemView = () => {
   return (
     <>
-      <Container maxWidth="sm" sx={{ height: "100%", overflow: "hidden" }}>
+      <Container
+        maxWidth="sm"
+        sx={{
+          height: "100%",
+          display: "flex",
+          overflow: "hidden",
+          flexDirection: "column",
+        }}
+      >
         <WeekItemViewDaysContextProvider>
           <WeekItemViewDays />
         </WeekItemViewDaysContextProvider>

@@ -1,4 +1,6 @@
-import { createContext, useContextSelector } from "use-context-selector";
+import isAfter from "date-fns/isAfter";
+import setHours from "date-fns/setHours";
+import setMinutes from "date-fns/setMinutes";
 import {
   Dispatch,
   FC,
@@ -8,15 +10,13 @@ import {
   useMemo,
   useState,
 } from "react";
+import { createContext, useContextSelector } from "use-context-selector";
 import { getEachWeekDay } from "../../Features/getEachWeekDay";
+import { getNow } from "../getNow";
 import { IReportTableDataTimeRange } from "../ReportTable/interfaces/IReportTableData";
 import { DEFAULT_DAY_TIME_RANGES } from "../ReportTable/utils/DEFAULT_DAY_TIME_RANGES";
 import { WeekItemViewContext } from "../WeekItemView/WeekItemViewContext";
 import { WeekDayTab } from "./interfaces/WeekDayTab";
-import { useNow } from "../useNow";
-import setHours from "date-fns/setHours";
-import setMinutes from "date-fns/setMinutes";
-import isAfter from "date-fns/isAfter";
 
 export type IWeekItemViewDaysContext = {
   eachWeekDay: Date[];
@@ -37,19 +37,20 @@ export const WeekItemViewDaysContextProvider: FC<PropsWithChildren<{}>> = (
 ) => {
   const { children } = props;
 
-  const now = useNow();
-
   const data = useContextSelector(
     WeekItemViewContext,
     ({ dataQuery }) => dataQuery.data
   );
 
   const [selectedTab, setSelectedTab] = useState(WeekDayTab.SEG);
+
   const eachWeekDay = useMemo(() => getEachWeekDay(data?.week), [data]);
 
   const dayTimeRanges = DEFAULT_DAY_TIME_RANGES;
 
   useEffect(() => {
+    const now = getNow();
+
     const today = now.getDay() - 1;
 
     const latestDayTimeRange = dayTimeRanges.find(
@@ -69,7 +70,7 @@ export const WeekItemViewDaysContextProvider: FC<PropsWithChildren<{}>> = (
     const targetTab = goToFirstTab ? 0 : today;
 
     setSelectedTab(targetTab);
-  }, [now]);
+  }, []);
 
   return (
     <WeekItemViewDaysContext.Provider

@@ -24,7 +24,7 @@ export const PageTeachersContentResults = () => {
 
   return (
     <>
-      <List sx={{ width: "100%", height: "100%" }}>
+      <List sx={{ width: "100%", height: "100%", py: 0 }}>
         <Divider />
 
         {isLoading && (

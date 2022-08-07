@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-
-const getNow = () => new Date();
+import { getNow } from "./getNow";
 
 export const useNow = () => {
   const [now, setNow] = useState(() => getNow());

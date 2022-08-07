@@ -8,24 +8,29 @@ import WeekItemViewDaysSelectedDayTable from "./WeekItemViewDaysSelectedDayTable
 import WeekSelect from "../WeekSelect/WeekSelect";
 
 export const WeekItemViewDays = () => {
-  const { isLoading, data } = useContextSelector(
+  const data = useContextSelector(
     WeekItemViewContext,
-    ({ dataQuery }) => dataQuery
+    ({ dataQuery }) => dataQuery.data
+  );
+
+  const isLoading = useContextSelector(
+    WeekItemViewContext,
+    ({ dataQuery }) => dataQuery.isLoading
   );
 
   return (
     <>
       <WeekItemViewDaysTabs />
 
-      <Divider />
+      <Divider sx={{ my: 2 }} />
 
-      <Box sx={{ py: 2 }}>
+      <Box>
         <WeekSelect />
       </Box>
 
-      <Divider />
+      <Divider sx={{ my: 2 }} />
 
-      <Box sx={{ flex: "1", overflow: "auto" }}>
+      <Box sx={{ flex: "1", overflow: "auto", mb: 2 }}>
         {(isLoading || !data) && <Loading />}
 
         {!(isLoading || !data) && <WeekItemViewDaysSelectedDayTable />}

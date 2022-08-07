@@ -1,19 +1,12 @@
-import {
-  Fragment,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-} from "react";
-import throttle from "lodash/throttle";
-import AppContainer from "../AppContainer/AppContainer";
 import Box from "@mui/material/Box";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Radio from "@mui/material/Radio";
+import throttle from "lodash/throttle";
+import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { useContextSelector } from "use-context-selector";
+import AppContainer from "../AppContainer/AppContainer";
 import { PageClassesContext } from "./PageClassesContext";
-import * as classes from "./PageClasses.module.css";
 
 const PageClassesContent = () => {
   const selectedCourse = useContextSelector(
@@ -125,9 +118,11 @@ const PageClassesContent = () => {
   }, [syncPaddings]);
 
   const updateSelectedCourse = (id: string) => {
-    setSelectedLabel(null);
-    setSelectedPeriod(null);
-    setSelectedCourse(id);
+    if (id) {
+      setSelectedLabel(null);
+      setSelectedPeriod(null);
+      setSelectedCourse(id);
+    }
 
     const stepPeriodEl = stepPeriodElRef.current;
     const containerWrapperEl = containerWrapperElRef.current;
@@ -144,8 +139,10 @@ const PageClassesContent = () => {
   };
 
   const updateSelectedPeriod = (id: string) => {
-    setSelectedLabel(null);
-    setSelectedPeriod(id);
+    if (id) {
+      setSelectedLabel(null);
+      setSelectedPeriod(id);
+    }
 
     const stepLabelEl = stepLabelElRef.current;
     const containerWrapperEl = containerWrapperElRef.current;
@@ -162,7 +159,9 @@ const PageClassesContent = () => {
   };
 
   const updateSelectedLabel = (id: string) => {
-    setSelectedLabel(id);
+    if (id) {
+      setSelectedLabel(id);
+    }
   };
 
   return (
@@ -178,33 +177,24 @@ const PageClassesContent = () => {
                 <Typography variant="h4" sx={{ mb: 3, pt: 2 }}>
                   Curso
                 </Typography>
-                <Box
-                  className={classes.courseContainer}
-                  sx={{
-                    gap: 1,
-                    display: "grid",
-                    gridTemplateRows: "repeat(1, auto)",
-                    gridTemplateColumns: "repeat(3, 1fr)",
-                    ["--items"]: String(availableCourses.length),
-                  }}
+
+                <ToggleButtonGroup
+                  fullWidth
+                  exclusive
+                  size="large"
+                  value={selectedCourse}
+                  onChange={(_, id) => updateSelectedCourse(id)}
                 >
                   {availableCourses.map((course) => (
-                    <Fragment key={course.id}>
-                      <Button
-                        disableRipple
-                        variant="outlined"
-                        sx={{ width: "100%", position: "relative", py: 4 }}
-                        onClick={() => updateSelectedCourse(course.id)}
-                      >
-                        <Radio
-                          disableRipple
-                          checked={selectedCourse === course.id}
-                        />
-                        <Typography>{course.label}</Typography>
-                      </Button>
-                    </Fragment>
+                    <ToggleButton
+                      key={course.id}
+                      disableRipple
+                      value={course.id}
+                    >
+                      {course.label}
+                    </ToggleButton>
                   ))}
-                </Box>
+                </ToggleButtonGroup>
               </Box>
             </Box>
 
@@ -221,33 +211,24 @@ const PageClassesContent = () => {
                 <Typography variant="h4" sx={{ mb: 3, pt: 2 }}>
                   Ano
                 </Typography>
-                <Box
-                  className={classes.periodContainer}
-                  sx={{
-                    gap: 1,
-                    display: "grid",
-                    gridTemplateRows: "repeat(1, auto)",
-                    gridTemplateColumns: "repeat(3, 1fr)",
-                    ["--items"]: String(availablePeriods.length),
-                  }}
+
+                <ToggleButtonGroup
+                  fullWidth
+                  exclusive
+                  size="large"
+                  value={selectedPeriod}
+                  onChange={(_, id) => updateSelectedPeriod(id)}
                 >
-                  {availablePeriods.map((course) => (
-                    <Fragment key={course.id}>
-                      <Button
-                        disableRipple
-                        variant="outlined"
-                        sx={{ width: "100%", py: 4 }}
-                        onClick={() => updateSelectedPeriod(course.id)}
-                      >
-                        <Radio
-                          disableRipple
-                          checked={selectedPeriod === course.id}
-                        />
-                        <Typography>{course.label}</Typography>
-                      </Button>
-                    </Fragment>
+                  {availablePeriods.map((period) => (
+                    <ToggleButton
+                      disableRipple
+                      key={period.id}
+                      value={period.id}
+                    >
+                      {period.label}
+                    </ToggleButton>
                   ))}
-                </Box>
+                </ToggleButtonGroup>
               </Box>
             </Box>
 
@@ -264,33 +245,20 @@ const PageClassesContent = () => {
                 <Typography variant="h4" sx={{ mb: 3, pt: 2 }}>
                   Turma
                 </Typography>
-                <Box
-                  className={classes.labelContainer}
-                  sx={{
-                    gap: 1,
-                    display: "grid",
-                    gridTemplateRows: "repeat(1, auto)",
-                    gridTemplateColumns: "repeat(2, 1fr)",
-                    ["--items"]: String(availableLabels.length),
-                  }}
+
+                <ToggleButtonGroup
+                  fullWidth
+                  exclusive
+                  size="large"
+                  value={selectedLabel}
+                  onChange={(_, id) => updateSelectedLabel(id)}
                 >
-                  {availableLabels.map((course) => (
-                    <Fragment key={course.id}>
-                      <Button
-                        disableRipple
-                        variant="outlined"
-                        sx={{ width: "100%", py: 4 }}
-                        onClick={() => updateSelectedLabel(course.id)}
-                      >
-                        <Radio
-                          disableRipple
-                          checked={selectedLabel === course.id}
-                        />
-                        <Typography>{course.label}</Typography>
-                      </Button>
-                    </Fragment>
+                  {availableLabels.map((label) => (
+                    <ToggleButton disableRipple key={label.id} value={label.id}>
+                      {label.label}
+                    </ToggleButton>
                   ))}
-                </Box>
+                </ToggleButtonGroup>
               </Box>
             </Box>
           </Box>

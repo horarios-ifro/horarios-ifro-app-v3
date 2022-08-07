@@ -6,13 +6,16 @@
 
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, 150px);
+
+  align-content: center;
+
+  min-height: 520px;
 }
 
 @media (min-width: 600px) {
   .actions {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 200px;
-    align-content: center;
 
     min-height: 300px;
   }

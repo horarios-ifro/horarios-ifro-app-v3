@@ -42,11 +42,8 @@ export const WeekItemViewDaysTabs = () => {
   };
 
   const formatDayLabel = useCallback(
-    (day: Date | number) => {
-      return `${formatWeekDayTabLabel(day)}${
-        isSameDay(now, day) ? " (HOJE)" : ""
-      }`;
-    },
+    (day: Date | number) =>
+      `${formatWeekDayTabLabel(day)}${isSameDay(now, day) ? " (HOJE)" : ""}`,
     [now]
   );
 
