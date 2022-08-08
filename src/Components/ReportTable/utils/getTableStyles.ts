@@ -3,25 +3,25 @@ export const tableBaseClassName = "renderTable";
 export const tableBaseClass = `.${tableBaseClassName}`;
 
 export const getTableStyles = () => `
-${tableBaseClass}, ${tableBaseClass} :is(div, span,
-  table, tbody, tfoot, thead, tr, th, td) {
-margin: 0;
-padding: 0;
-border: 0;
-font-size: 100%;
-font: inherit;
-vertical-align: baseline;
+${tableBaseClass},
+${tableBaseClass} :is(div, span, table, tbody, tfoot, thead, tr, th, td) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
 ${tableBaseClass} {
-line-height: 1;
-font-family: sans-serif;
-border-collapse: collapse;
-border-spacing: 0;
+  line-height: 1;
+  font-family: sans-serif;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 ${tableBaseClass} :is(*, *::after, *::before) {
-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 ${tableBaseClass} {
@@ -41,8 +41,8 @@ ${tableBaseClass} :is(td, th) {
 
 ${tableBaseClass} thead {
   background-color: #e26b0a;
-  color: white;
   font-weight: bold;
+  color: white;
 }
 
 ${tableBaseClass} .col-day {
@@ -78,14 +78,13 @@ ${tableBaseClass} .col-time {
   vertical-align: middle;
   font-weight: bold;
   padding: 0 0.75rem;
-
   font-size: 0.8125;
 }
 
 ${tableBaseClass} .col-text {
   font-weight: 500;
   padding: 0.25rem 0.75rem 0.25rem 0.75rem;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 ${tableBaseClass} :is(tr:is([data-week-day="1"], [data-week-day="3"], [data-week-day="5"]), .col-day, .col-date, .col-time) {

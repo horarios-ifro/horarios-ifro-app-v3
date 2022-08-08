@@ -1,19 +1,30 @@
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
+import Container, { ContainerProps } from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { FC } from "react";
 import Divider from "@mui/material/Divider";
 
 type IFooterProps = {
   beforeDivider?: boolean;
+
+  containerProps?: ContainerProps;
 };
 
-const Footer: FC<IFooterProps> = ({ beforeDivider = true }) => (
+const Footer: FC<IFooterProps> = ({ beforeDivider = true, containerProps }) => (
   <>
     {beforeDivider && <Divider />}
 
     <footer style={{ flexGrow: 0 }}>
-      <Container sx={{ p: 2, py: 1, display: "flex", alignItems: "center" }}>
+      <Container
+        {...containerProps}
+        sx={{
+          p: 2,
+          py: 1,
+          display: "flex",
+          alignItems: "center",
+          ...containerProps?.sx,
+        }}
+      >
         <Box sx={{ flex: 1 }}>
           <Typography component={"span"}>
             Criado por{" "}

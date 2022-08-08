@@ -13,7 +13,7 @@ const PageHomeContent = () => {
 
   return (
     <>
-      <AppContainer>
+      <AppContainer containerProps={{ maxWidth: "sm" }}>
         <Box py={3} className={styles.actions}>
           {PAGE_HOME_ACTIONS.map((action) => (
             <Fragment key={action.label}>
