@@ -1,4 +1,5 @@
 import { IGetWeekTeacherResourceResponseDto } from "../horarios-ifro-data-v2-client/api/resources/weeks/interfaces/IGetWeekTeacherResourceResponseDto";
+import { getFixedSubjectSlug } from "./utils/getFixedSubjectSlug";
 
 export const getReportTableDataColumnFromWeekTeacher = (
   data: IGetWeekTeacherResourceResponseDto
@@ -12,7 +13,7 @@ export const getReportTableDataColumnFromWeekTeacher = (
       weekDay: item.weekDayOrder,
 
       text: [
-        item.subject?.name ?? item.subject?.slugs[0].slug,
+        item.subject?.name ?? getFixedSubjectSlug(item.subject?.slugs[0].slug!),
         item.klass?.slugs[0].slug,
       ].join(" - "),
     })),
