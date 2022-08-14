@@ -62,7 +62,7 @@ export const PageItemReportDialogContentOpenedViewPreview = () => {
       >
         <Button
           href={imgURL}
-          variant="contained"
+          variant="outlined"
           download="relatorio.png"
           startIcon={<DownloadIcon />}
         >
@@ -72,7 +72,7 @@ export const PageItemReportDialogContentOpenedViewPreview = () => {
         <Button
           href={imgURL}
           target="_blank"
-          variant="contained"
+          variant="outlined"
           startIcon={<OpenInNewIcon />}
         >
           Abrir em Nova Guia
