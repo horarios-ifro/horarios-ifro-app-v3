@@ -191,8 +191,9 @@ const PageClassesContent = () => {
                       disableRipple
                       key={course.id}
                       value={course.id}
+                      className={classes.courseToggleButton}
                     >
-                      <Box className={classes.courseButton}>
+                      <Box className={classes.courseToggleButtonBox}>
                         <span>{course.emoji}</span>
                         <span>{course.label}</span>
                       </Box>
@@ -228,8 +229,11 @@ const PageClassesContent = () => {
                       disableRipple
                       key={period.id}
                       value={period.id}
+                      className={classes.courseToggleButton}
                     >
-                      {period.label}
+                      <Box className={classes.courseToggleButtonBox}>
+                        <span>{period.label}</span>
+                      </Box>
                     </ToggleButton>
                   ))}
                 </ToggleButtonGroup>
@@ -258,8 +262,15 @@ const PageClassesContent = () => {
                   onChange={(_, id) => updateSelectedLabel(id)}
                 >
                   {availableLabels.map((label) => (
-                    <ToggleButton disableRipple key={label.id} value={label.id}>
-                      {label.label}
+                    <ToggleButton
+                      disableRipple
+                      key={label.id}
+                      value={label.id}
+                      className={classes.courseToggleButton}
+                    >
+                      <Box className={classes.courseToggleButtonBox}>
+                        <span>{label.label}</span>
+                      </Box>
                     </ToggleButton>
                   ))}
                 </ToggleButtonGroup>
