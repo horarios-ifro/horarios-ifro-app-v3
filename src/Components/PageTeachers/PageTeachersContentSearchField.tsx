@@ -25,6 +25,7 @@ export const PageTeachersContentSearchField = () => {
           size={"small"}
           variant="outlined"
           value={searchQuery}
+          autoComplete={"off"}
           sx={{ width: "100%" }}
           onFocus={(e) => e.target.select()}
           placeholder={"Buscar por professor..."}
