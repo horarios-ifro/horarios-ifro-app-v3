@@ -1,7 +1,7 @@
 import { AppContent } from "../AppContent/AppContent";
-import Footer from "../Footer/Footer";
 import PageHomeContent from "./PageHomeContent";
 import PageHomeHeader from "./PageHomeHeader";
+import PageHomeFooter from "./PageHomeFooter";
 
 const PageHome = () => (
   <>
@@ -11,7 +11,7 @@ const PageHome = () => (
       <PageHomeContent />
     </AppContent>
 
-    <Footer containerProps={{ maxWidth: "sm" }} />
+    <PageHomeFooter />
   </>
 );
 
