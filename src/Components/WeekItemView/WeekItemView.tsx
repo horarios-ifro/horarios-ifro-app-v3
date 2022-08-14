@@ -1,12 +1,12 @@
 import Container from "@mui/material/Container";
 import { WeekItemViewDays } from "../WeekItemViewDays/WeekItemViewDays";
 import { WeekItemViewDaysContextProvider } from "../WeekItemViewDays/WeekItemViewDaysContext";
+import Box from "@mui/material/Box";
 
 const WeekItemView = () => {
   return (
     <>
-      <Container
-        maxWidth="sm"
+      <Box
         sx={{
           height: "100%",
           display: "flex",
@@ -17,7 +17,7 @@ const WeekItemView = () => {
         <WeekItemViewDaysContextProvider>
           <WeekItemViewDays />
         </WeekItemViewDaysContextProvider>
-      </Container>
+      </Box>
     </>
   );
 };

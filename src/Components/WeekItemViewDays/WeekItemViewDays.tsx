@@ -1,11 +1,12 @@
-import { useContextSelector } from "use-context-selector";
-import { WeekItemViewContext } from "../WeekItemView/WeekItemViewContext";
-import { WeekItemViewDaysTabs } from "./WeekItemViewDaysTabs";
-import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
+import { useContextSelector } from "use-context-selector";
 import Loading from "../Loading/Loading";
-import WeekItemViewDaysSelectedDayTable from "./WeekItemViewDaysSelectedDayTable";
+import { WeekItemViewContext } from "../WeekItemView/WeekItemViewContext";
 import WeekSelect from "../WeekSelect/WeekSelect";
+import WeekItemViewDaysSelectedDayTable from "./WeekItemViewDaysSelectedDayTable";
+import { WeekItemViewDaysTabs } from "./WeekItemViewDaysTabs";
 
 export const WeekItemViewDays = () => {
   const data = useContextSelector(
@@ -20,21 +21,31 @@ export const WeekItemViewDays = () => {
 
   return (
     <>
-      <WeekItemViewDaysTabs />
+      <Container maxWidth="sm" sx={{ p: 0 }}>
+        <WeekItemViewDaysTabs />
+      </Container>
 
-      <Divider sx={{ my: 2 }} />
+      <Container maxWidth="sm" sx={{ p: 0 }}>
+        <Divider />
+      </Container>
 
-      <Box>
-        <WeekSelect />
-      </Box>
+      <Container maxWidth="sm">
+        <Box sx={{ my: 2 }}>
+          <WeekSelect />
+        </Box>
+      </Container>
 
-      <Divider sx={{ my: 2 }} />
+      <Container maxWidth="sm" sx={{ p: 0 }}>
+        <Divider />
+      </Container>
 
-      <Box sx={{ flex: "1", overflow: "auto", mb: 2 }}>
-        {(isLoading || !data) && <Loading />}
+      <Container maxWidth="sm">
+        <Box sx={{ flex: "1", overflow: "auto", my: 2 }}>
+          {(isLoading || !data) && <Loading />}
 
-        {!(isLoading || !data) && <WeekItemViewDaysSelectedDayTable />}
-      </Box>
+          {!(isLoading || !data) && <WeekItemViewDaysSelectedDayTable />}
+        </Box>
+      </Container>
     </>
   );
 };
